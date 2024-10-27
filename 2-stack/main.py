@@ -1,17 +1,13 @@
 from stack import Stack
 
-if __name__ == '__main__':
+def reverse_string(string):
     s = Stack()
-    s.push(2)
-    s.push(4)
-    s.push(6)
+    revString = ''
+    for char in string:
+        s.push(char)
+    for revChar in range(s.size()):
+        revString += s.pop()
+    return revString
 
-    print(s.peek())
-
-    s.pop()
-    s.pop()
-    s.pop()
-
-    print(s.size())
-
-    s.pop()
+if __name__ == '__main__':
+    print(reverse_string("We will conquere COVID-19"))
