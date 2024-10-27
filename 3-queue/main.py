@@ -21,9 +21,8 @@ if __name__ == '__main__':
         'Price': 135.00
     })
 
-    print(q.dequeue())
-    print(q.dequeue())
-    print(q.dequeue())
+    # print(q.dequeue())
+    # print(q.dequeue())
+    # print(q.dequeue())
 
-    print(q.size())
-    print(q.is_empty())
+    print(q.front())

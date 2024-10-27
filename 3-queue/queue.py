@@ -9,6 +9,9 @@ class Queue:
 
     def dequeue(self):
         return self.buffer.pop()
+
+    def front(self):
+        return self.buffer[-1]
     
     def is_empty(self):
         return len(self.buffer) == 0
