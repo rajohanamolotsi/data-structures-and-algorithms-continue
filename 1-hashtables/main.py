@@ -7,8 +7,5 @@ if __name__ == '__main__':
             tokens = line.split(',')
             t[tokens[0]] = tokens[1].strip()
 
-    del t['march 10']
-    del t['march 9']
-
     for idx in t.arr:
         print(idx)

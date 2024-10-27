@@ -1,7 +1,7 @@
 class HashTable:
     def __init__(self, max):
         self.MAX = max
-        self.arr = [[] for _ in range(self.MAX)]
+        self.arr = [None for _ in range(self.MAX)]
 
     def get_hash(self, key):
         hash = 0
@@ -11,23 +11,30 @@ class HashTable:
     
     def __getitem__(self, key):
         h = self.get_hash(key)
-        for element in self.arr[h]:
-            if element[0] == key:
-                return element[0]
+        original_h = h
+        probing_count = 0
+        while self.arr[h] is not None:
+            if self.arr[h][0] == key:
+                return self.arr[h][1]
+            probing_count += 1
+            h = (original_h + probing_count) % self.MAX
 
     def __setitem__(self, key, value):
         h = self.get_hash(key)
-        found = False
-        for idx, element in enumerate(self.arr[h]):
-            if len(element) == 2 and element[0] == key:
-                self.arr[h][idx] = (key, value)
-                found = True
-        if not found:
-            self.arr[h].append((key, value))
+        original_h = h
+        probing_count = 0
+        while self.arr[h] is not None:
+            probing_count += 1
+            h = (original_h + probing_count) % self.MAX
+
+        self.arr[h] = (key, value)
 
     def __delitem__(self, key):
         h = self.get_hash(key)
-        for idx, element in enumerate(self.arr[h]):
-            if element[0] == key:
-                print('del', idx)
-                del self.arr[h][idx]
+        original_h = h
+        probing_count = 0
+        while self.arr[h] is not None:
+            if self.arr[h][0] == key:
+                del self.arr[h][1]
+            probing_count += 1
+            h = (original_h + probing_count) % self.MAX
