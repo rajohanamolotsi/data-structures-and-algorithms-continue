@@ -11,3 +11,4 @@ def reverse_string(string):
 
 if __name__ == '__main__':
     print(reverse_string("We will conquere COVID-19"))
+    print(reverse_string("I am the king"))
