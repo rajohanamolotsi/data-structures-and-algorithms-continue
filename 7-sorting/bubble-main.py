@@ -1,15 +1,31 @@
+def bubble_sort(data):
+    size = len(data)
+    swapped = False
+    for idx in range(size - 1):
+        for swap_idx in range(size - 1 - idx):
+            if data[swap_idx] > data[swap_idx + 1]:
+                temp = data[swap_idx]
+                data[swap_idx] = data[swap_idx + 1]
+                data[swap_idx + 1] = temp
+                swapped = True
+
+        if not swapped:
+            break
+
+        '''
+        For a list like [1, 2, 3, 4, 5], which is already sorted,
+         no swaps will occur on the first pass. swapped will stay False,
+          triggering the break, and ending the sorting process after just
+           one pass instead of performing all n - 1 passes.
+        '''
+
+
 if __name__ == '__main__':
-    elements = [4, 5, 6, 7, 2, 3, 9, 0]
-    size = len(elements)
-    for temp_idx in range(size - 1):
-        swapped = False
-        for idx in range(size - 1 - temp_idx):
-            '''
-            The reason why temp_idx goes from 0 - 6 i is because
-             we know that the biggest number will bubble itself up to
-              the last element, and it will get there by element[temp_idx + 1] (because
-               when it gets to temp_idx = 6, temp_idx + 1 = 7 which is the last index of the list)
-            '''
-            if idx == 0:
-                print('===================================')
-            print(f'size - 1: {size - 1} | temp_idx: {temp_idx} | idx: {idx}')
+    data = ['mona', 'dhaval', 'aamir', 'tina', 'chang']
+    # data = [5, 9, 2, 1, 67, 34, 88, 34]
+    bubble_sort(data)
+    print(data)
+
+    for element in data:
+        print(f'name: {element[0]}, ord: {ord(element[0])}')
+                
