@@ -1,16 +1,15 @@
 if __name__ == '__main__':
     elements = [4, 5, 6, 7, 2, 3, 9, 0]
-    sorted_elements = []
-    count = 0
-    print(f'starting point - count: {count}, len(elements): {len(elements)}')
-    while count != len(elements) - 1:
-        for _ in range(count, len(elements) - 1):
-            if count + 1 > 7:
-                break
-            else:
-                if elements[count] < elements[count + 1]:
-                    sorted_elements.append(elements[count])
-        print(count + 1)
-        count += 1
-
-    print(sorted_elements)
+    size = len(elements)
+    for temp_idx in range(size - 1):
+        swapped = False
+        for idx in range(size - 1 - temp_idx):
+            '''
+            The reason why temp_idx goes from 0 - 6 i is because
+             we know that the biggest number will bubble itself up to
+              the last element, and it will get there by element[temp_idx + 1] (because
+               when it gets to temp_idx = 6, temp_idx + 1 = 7 which is the last index of the list)
+            '''
+            if idx == 0:
+                print('===================================')
+            print(f'size - 1: {size - 1} | temp_idx: {temp_idx} | idx: {idx}')
