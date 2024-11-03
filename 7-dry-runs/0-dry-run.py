@@ -33,7 +33,50 @@ def insertion_sort(data):
             data[idx_J], data[idx_J - 1] = data[idx_J - 1], data[idx_J]
             idx_J -= 1
 
+def merge_two_sorted_lists(left, right, data):
+    len_left = len(left)
+    len_right = len(right)
+
+    i = j = k = 0
+
+    while i < len_left and j < len_right:
+        if left[i] <= right[j]:
+            data[k] = left[i]
+            i += 1
+            k += 1
+        else:
+            data[k] = right[j]
+            j += 1
+            k += 1
+
+    while i < len_left:
+        data[k] = left[i]
+        i += 1
+        k += 1
+
+    while j < len_right:
+        data[k] = right[j]
+        j += 1
+        k += 1
+
+    return data
+
+def merge_sort(data):
+    if len(data) <= 1:
+        return
+    
+    mid = len(data) // 2
+
+    left = data[:mid]
+    right = data[mid:]
+
+    merge_sort(left)
+    merge_sort(right)
+
+    return merge_two_sorted_lists(left, right, data) 
+
 if __name__ == '__main__':
+    arr = [11, 9, 29, 7, 2, 15, 28, 22, 21, 77, 99]
     tests = [
         [11, 9, 29, 7, 2, 15, 28],
         [3, 7, 9, 11],
@@ -43,6 +86,4 @@ if __name__ == '__main__':
         [6]
     ]
 
-    for arr in tests:
-        bubble_sort(arr)
-        print(f'sorted_arr: {arr}')
+    print(merge_sort(arr))
