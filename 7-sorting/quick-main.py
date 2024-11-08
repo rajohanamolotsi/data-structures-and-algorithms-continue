@@ -1,25 +1,25 @@
-def partition(data, low, high):
-    leftwall = low
-    pivot = data[low]
+def partition(data, start, end):
+    pivot = data[start]
+    leftwall = start
 
-    for idx in range(low + 1, high + 1):
-        if data[idx] < pivot:
+    for idx in range(start + 1, end + 1): # mark
+        if data[idx] < pivot: # mark
             leftwall += 1
-            data[leftwall], data[idx] = data[idx], data[leftwall]
+            data[idx], data[leftwall] = data[leftwall], data[idx]
 
-    data[low], data[leftwall] = data[leftwall], data[low]
+    data[start], data[leftwall] = data[leftwall], data[start]
+    
+    return leftwall # mark
 
-    return leftwall
-
-def quick_sort(data, low, high):
-    if low < high:
-        pivot_idx = partition(data, low, high)
-        quick_sort(data, pivot_idx + 1, high)
-        quick_sort(data, low, pivot_idx - 1)
+def quick_sort(data, start, end):
+    if start < end:
+        pivot_idx = partition(data, start, end) # mark
+        quick_sort(data, start, pivot_idx - 1)
+        quick_sort(data, pivot_idx + 1, end)
 
 if __name__ == '__main__':
     data = [29, 10, 14, 37, 13]
-    low = 0
-    high = len(data) - 1
-    quick_sort(data, low, high)
+    start = 0
+    end = len(data) - 1
+    quick_sort(data, start, end)
     print(data)
