@@ -1,11 +1,8 @@
 class Graph:
-
     def __init__(self):
-
         self.graph = {}
 
     def add_node(self, node):
-        
         if node not in self.graph:
             self.graph[node] = []
 
@@ -26,15 +23,16 @@ class Graph:
     def get_neighbours(self, node):
         return self.graph.get(node, [])
     
-    def has_edge(self, node1, node2):
+    def has_edges(self, node1, node2):
         return node2 in self.graph.get(node1, [])
-
 
 if __name__ == '__main__':
     g = Graph()
     g.add_node(1)
     g.add_node(2)
     g.add_edge(1, 2)
-    g.add_edge(1, 3) 
+    g.add_edge(1, 3)
     g.add_edge(2, 4)
     g.display_graph()
+    print(f'neighbours of node 1: {g.get_neighbours(1)}')
+    print(f'Edges between 1, 3: {g.has_edges(1, 2)}')
