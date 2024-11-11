@@ -34,5 +34,5 @@ if __name__ == '__main__':
     g.add_edge(1, 3)
     g.add_edge(2, 4)
     g.display_graph()
-    print(f'neighbours of node 1: {g.get_neighbours(1)}')
+    print(f'Neighbours of node 1: {g.get_neighbours(1)}')
     print(f'Edges between 1, 3: {g.has_edges(1, 2)}')
