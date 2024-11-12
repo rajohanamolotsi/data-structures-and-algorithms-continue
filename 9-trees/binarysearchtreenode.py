@@ -14,6 +14,7 @@ class BinarySearchTreeNode:
             else:
                 self.left = BinarySearchTreeNode(data)
 
+
         else:
             if self.right:
                 self.right.add_child(data)
@@ -39,8 +40,6 @@ class BinarySearchTreeNode:
     def in_order(self):
         elements = []
 
-        # pre-order 
-
         if self.left:
             elements += self.left.in_order()
 
@@ -49,6 +48,37 @@ class BinarySearchTreeNode:
         if self.right:
             elements += self.right.in_order()
 
-        # post-order
-
         return elements
+    
+    def delete(self, value):
+
+        if value < self.data:
+            if self.left:
+                self.left = self.left.delete(value)
+        if value > self.data:
+            if self.right:
+                self.right = self.right.delete(value)
+
+        if self.left is None and self.right is None:
+            return None
+        elif self.left is None:
+            return self.right
+        elif self.right is None:
+            return self.left
+        
+        min_value = self.left.find_min()
+        self.data = min_value
+        self.left = self.left.delete(min_value)
+
+        return self
+
+
+    def find_min(self):
+        if self.left is None:
+            return self.data
+        return self.left.find_min()
+
+    def find_max(self):
+        if self.right is None:
+            return self.data
+        return self.right.find_max()
