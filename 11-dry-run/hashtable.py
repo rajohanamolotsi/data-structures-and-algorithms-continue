@@ -11,12 +11,24 @@ class Hashtable:
     
     def __getitem__(self, key):
         h = self.get_hash(key)
-        return self.arr[h]
+        for element in self.arr[h]:
+            if element[0] == key:
+                return element[1]
+
 
     def __setitem__(self, key, value):
         h = self.get_hash(key)
-        self.arr[h] = value
+        found = False
+        for idx, element in enumerate(self.arr):
+            if len(element) == 2 and element[0] == key:
+                self.arr[h][idx] = (key, value)
+        if not found:
+            self.arr.append((key, value))
+            
 
     def __delitem__(self, key):
         h = self.get_hash(key)
-        self.arr[h] = None
+        for idx, element in enumerate(self.arr):
+            if element[0] == key:
+                print('del', idx)
+                del self.arr[h][idx]
