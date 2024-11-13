@@ -1,7 +1,7 @@
 class HashTable:
     def __init__(self):
         self.MAX = 10
-        self.arr = [[] for _ in range(self.MAX)]
+        self.arr = [None for _ in range(self.MAX)]
 
     def get_hash(self, key):
         hash = 0
@@ -11,23 +11,35 @@ class HashTable:
     
     def __getitem__(self, idx):
         h = self.get_hash(idx)
-        for element in self.arr[h]:
-            if element[0] == idx:
-                return element[1]
+        original_h = h
+        probing = 0
+        while self.arr[h] is not None:
+            if self.arr[h][0] == idx:
+                return self.arr[h][1]
+            probing += 1
+            h = (original_h + probing) % self.MAX
+
+        raise KeyError("Index not found")
 
     def __setitem__(self, key, value):
         h = self.get_hash(key)
-        found = False
-        for idx, element in enumerate(self.arr):
-            if len(element) == 2 and element[0] == key:
-                found = True
-                self.arr[h][idx] = (key, value)
-        if not found:
-            self.arr[h].append((key, value))
+        original_h = h
+        probing = 0
+        while self.arr[h] is not None:
+            probing += 1
+            h = (original_h + probing) % self.MAX
+
+        self.arr[h] = (key, value)
 
     def __delitem__(self, key):
         h = self.get_hash(key)
-        for idx, element in enumerate(self.arr[h]):
-            if element[0] == key:
-                print('del', idx)
-                del self.arr[h][idx]
+        original_h = h
+        probing = 0
+        while self.arr[h] is not None:
+            if self.arr[h][0] == key:
+                del self.arr[h]
+                return
+            probing += 1
+            h = (original_h + probing) % self.MAX
+            
+        raise KeyError("Key not found")
