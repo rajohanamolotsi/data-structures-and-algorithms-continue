@@ -7,12 +7,13 @@ class BinarySearchTreeNode:
     def add_child(self, data):
         if data == self.data:
             return
-
+        
         elif data < self.data:
             if self.left:
                 self.left.add_child(data)
             else:
                 self.left = BinarySearchTreeNode(data)
+
         else:
             if self.right:
                 self.right.add_child(data)
@@ -22,22 +23,17 @@ class BinarySearchTreeNode:
     def search(self, value):
         if value == self.data:
             return True
+        
         elif value < self.data:
-            if self.left:
-                return self.left.search(value)
-            else:
-                return False
+            return self.left.search(value) if self.left else False
         elif value > self.data:
-            if self.right:
-                return self.right.search(value)
-            else:
-                return False
-            
+            return self.right.search(value) if self.right else False
+        
     def find_min(self):
         if self.left:
             return self.left.find_min()
         return self.data
-    
+
     def find_max(self):
         if self.right:
             return self.right.find_max()
@@ -62,18 +58,14 @@ class BinarySearchTreeNode:
             self.right = self.right.delete(min_value)
 
         return self
-    
+
     def in_order(self):
         elements = []
-
         if self.left:
             elements += self.left.in_order()
-
         elements.append(self.data)
-
         if self.right:
             elements += self.right.in_order()
-
         return elements
     
 def build_tree(elements):
