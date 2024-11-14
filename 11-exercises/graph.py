@@ -41,6 +41,23 @@ def BFS(graph_dict, start_node):
 
     return visited
 
+def BFS_path_exists(graph_dict, start_node, end_node):
+    visited = []
+    queue = [start_node]
+    while queue:
+        s = queue.pop(0)
+        if s == end_node:
+            return True
+        
+        if s not in visited:
+            visited.append(s)
+        
+        for n in graph_dict[s]:
+            if n not in visited:
+                queue.append(n)
+
+    return False
+
 def DFS(graph_dict, start_node):
     visited = []
     stack = [start_node]
@@ -68,8 +85,25 @@ if __name__ == '__main__':
 
     g.print_tree()
 
-    graph_dict = g.graph
-    start_node = 1
+    print(f'BFS: {BFS_path_exists(graph_dict=g.graph, start_node=3, end_node=5)}')
 
-    print(f'DFS: {DFS(graph_dict, start_node)}')
-    print(f'BFS: {BFS(graph_dict, start_node)}')
+    data = {
+        "karan": ["darshan","nikhil"],
+        "darshan": ["khantil", "tanuj"],
+        "tanuj": ["nikhil"],
+        "krinish": ["hetul"],
+        "khantil" : [],
+        "nikhil" : []
+ }
+
+    print(f'DFS: {DFS(data, 'karan')}')
+
+    data = {
+    'A': {'B'},
+    'B': {'C', 'D'},
+    'C': {'E'},
+    'D': {'E'},
+    'E': {'F'},
+    'F': set()
+  }
+    print(f'BFS: {BFS_path_exists(data, start_node='A', end_node='D')}')
