@@ -13,7 +13,7 @@ class BinarySearchTreeNode:
                 self.left.add_child(data)
             else:
                 self.left = BinarySearchTreeNode(data)
-            
+
         else:
             if self.right:
                 self.right.add_child(data)
@@ -23,13 +23,12 @@ class BinarySearchTreeNode:
     def search(self, value):
         if value == self.data:
             return True
-        
-        elif value < self.data:
+
+        if value < self.data:
             if self.left:
                 return self.left.search(value)
             else:
                 return False
-        
         elif value > self.data:
             if self.right:
                 return self.right.search(value)
@@ -37,14 +36,12 @@ class BinarySearchTreeNode:
                 return False
             
     def delete(self, value):
-        # check - value == self.data
         if value < self.data:
             if self.left:
                 self.left = self.left.delete(value)
         elif value > self.data:
             if self.right:
                 self.right = self.right.delete(value)
-
         else:
             if self.left is None and self.right is None:
                 return None
@@ -59,19 +56,6 @@ class BinarySearchTreeNode:
 
         return self
     
-    def in_order_traversal(self):
-        elements = []
-
-        if self.left:
-            elements += self.left.in_order_traversal()
-
-        elements.append(self.data)
-
-        if self.right:
-            elements += self.right.in_order_traversal()
-
-        return elements
-
     def find_min(self):
         if self.left:
             return self.left.find_min()
@@ -82,8 +66,21 @@ class BinarySearchTreeNode:
             return self.right.find_max()
         return self.data
     
+    def in_order_traversal(self):
+        elements = []
+        if self.left:
+            elements += self.left.in_order_traversal()
+
+        elements.append(self.data)
+
+        if self.right:
+            elements += self.right.in_order_traversal()
+
+        return elements
+
 def build_tree(elements):
     root = BinarySearchTreeNode(elements[0])
+
     for data in elements[1:]:
         root.add_child(data)
 
