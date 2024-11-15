@@ -5,9 +5,7 @@ def linear(data, target):
     return -1
 
 def binary(data, target):
-    size = len(data)
-    left, right = 0, size - 1
-
+    left, right = 0, len(data) - 1
     while left <= right:
         mid = (left + right) // 2
         if data[mid] == target:
@@ -16,15 +14,12 @@ def binary(data, target):
             left = mid + 1
         else:
             right = mid - 1
-
     return -1
 
 def recursive_binary(data, left, right, target):
     if right < left:
         return -1
-    
     mid = (left + right) // 2
-
     if data[mid] == target:
         return mid
     elif data[mid] < target:
