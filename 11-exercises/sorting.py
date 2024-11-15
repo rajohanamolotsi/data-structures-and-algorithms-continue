@@ -1,10 +1,12 @@
-def bubble_sort(data):
+def bubble_sort(data, key):
     size = len(data)
     swapped = False
     for i in range(size - 1):
         for j in range(size - 1 - i):
-            if data[j] > data[j + 1]:
-                data[j], data[j + 1] = data[j + 1], data[j]
+            if data[j][key] > data[j + 1][key]:
+                temp = data[j][key]
+                data[j][key] = data[j + 1][key]
+                data[j + 1][key] = temp
                 swapped = True
 
         if not swapped:
@@ -110,22 +112,13 @@ if __name__ == '__main__':
         [6]
     ]
 
-    for data in tests:
-        low, high = 0, len(data) - 1
-        bubble_sort(data)
-        print(f'bubble_data: {data}')
+    elements = [
+        { 'name': 'mona',   'transaction_amount': 1000, 'device': 'iphone-10'},
+        { 'name': 'dhaval', 'transaction_amount': 400,  'device': 'google pixel'},
+        { 'name': 'kathy',  'transaction_amount': 200,  'device': 'vivo'},
+        { 'name': 'aamir',  'transaction_amount': 800,  'device': 'iphone-8'},
+    ]
 
-        selection_sort(data)
-        print(f'selection_data: {data}')
-
-        insertion_sort(data)
-        print(f'insertion_data: {data}')
-
-        merge_sort(data)
-        print(f'merge_data: {data}')
-
-        quick_sort(data, low, high)
-        print(f'quick_data: {data}')
-
-        shell_sort(data)
-        print(f'shell_data: {data}')
+    bubble_sort(elements, key='transaction_amount')
+    for element in elements:
+        print(element)
